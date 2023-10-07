@@ -7,3 +7,6 @@ def PruebaPagina(request):
 
 def inicio(request):
     return render(request, "AppBlog/inicio.html")
+
+def acercaDeMi(request):
+    return render(request,"AppBlog/acerca_mi.html")
