@@ -20,7 +20,6 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars"></i>
@@ -36,6 +35,7 @@
             </div>
         </nav>
         <!-- Page Header-->
+        {% block header_about %}
         <header class="masthead" style="background-image: url('assets/img/about-bg.jpg')">
             <img class="img-fluid rounded-circle" src="{% static 'AppBlog/assets/img/01.jpg' %}" alt="..." width="400">
             <div class="container position-relative px-4 px-lg-5">
@@ -49,6 +49,7 @@
                 </div>
             </div>
         </header>
+        {% endblock %}
         <!-- Main Content-->
         {% block contenido_about %}
         <main class="mb-4">
