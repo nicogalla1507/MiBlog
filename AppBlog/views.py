@@ -21,7 +21,7 @@ def register(request):
             info = mi_formulario.cleaned_data
             reg = Register(usuario=info["usuario"],email=info["email"],contrasena=info["contrasena"])
             reg.save()
-            return render(request,"AppBlog/inicio.html")
+            return render(request,"AppBlog/inicio_register.html")
     else:
         mi_formulario = RegisterForm()
     
