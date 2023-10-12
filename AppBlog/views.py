@@ -13,9 +13,6 @@ def inicio(request):
 def acercaDeMi(request):
     return render(request,"AppBlog/acerca_mi.html")
 
-def probandoNotebook(request):
-    return "hola"
-
 def register(request):
     if request.method == "POST":
         mi_formulario = RegisterForm(request.POST)
