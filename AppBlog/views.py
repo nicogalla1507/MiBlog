@@ -1,6 +1,6 @@
-from django.shortcuts import render
-from .forms import RegisterForm
-from .models import Register
+from django.shortcuts import render, redirect
+from .forms import RegisterForm, AutorForm
+from .models import Register, Autor
 
 # Create your views here.
 
@@ -26,3 +26,17 @@ def register(request):
         mi_formulario = RegisterForm()
     
     return render(request, "AppBlog/register_form.html",{"mi_formulario":mi_formulario})
+
+
+def editar_informacion_personal(request):
+    autor = Autor.objects.first()  # Supongamos que solo hay un autor en tu blog.
+    if request.method == 'POST':
+        form = AutorForm(request.POST, request.FILES, instance=autor)
+        if form.is_valid():
+            form.save()
+            return redirect('AppBlog/acerca_mi.html')  # Redirige a donde desees después de guardar los cambios
+    else:
+        form = AutorForm(instance=autor)
+    return render(request, 'AppBlog/agregar_info.html', {'form': form})
+    
+    

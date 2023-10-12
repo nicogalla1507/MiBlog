@@ -6,5 +6,6 @@ urlpatterns = [
     path('pagina/',PruebaPagina,name="index"),
     path('inicio/',inicio,name="inicio"),
     path('acerca/',acercaDeMi,name="about"),
-    path('register/', register,name="register")
+    path('register/', register,name="register"),
+    path('editar/',editar_informacion_personal,name="editar")
 ]

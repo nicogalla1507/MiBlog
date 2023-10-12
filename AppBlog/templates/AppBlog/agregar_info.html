@@ -1,0 +1,13 @@
+{% extends "AppBlog/acerca_mi.html" %}
+{% load static %}
+{% block contenido_about %}
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar cambios</button>
+</form>
+
+<a href="{% url 'about' p.form %}">Volver a la página Acerca de Mí</a>
+
+{% endblock %}
