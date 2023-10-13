@@ -1,5 +1,5 @@
 from django import forms
-from .models import Autor
+from .models import AcercaDeMi
 
 class RegisterForm(forms.Form):
     usuario = forms.CharField()
@@ -7,7 +7,6 @@ class RegisterForm(forms.Form):
     contrasena = forms.CharField()
     
 
-class AutorForm(forms.ModelForm):
-    class Meta:
-        model = Autor
-        fields = ['nombre', 'biografia', 'foto']
+class AutorForm(forms.Form):
+    nombre = forms.CharField(max_length=50)
+    contenido = forms.CharField()

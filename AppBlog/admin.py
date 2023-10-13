@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Autor
+from .models import AcercaDeMi
 
 
 # Register your models here.
 
 
-admin.site.register(Autor)
+admin.site.register(AcercaDeMi)
