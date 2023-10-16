@@ -2,11 +2,11 @@
 {% load static %}
 {% block contenido_about %}
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar cambios</button>
+<form action="" method="POST" >{% csrf_token %}
+
+    {{ form1.as_p }}
+    <input type="submit" value="Enviar">
 </form>
-<a href="{% url 'about' %}">Editar Información</a>
+
 
 {% endblock %}

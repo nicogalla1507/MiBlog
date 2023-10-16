@@ -28,7 +28,7 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Acerca de mi</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">inicio de sesión</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editar' %}">Editar info personal</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Registrate!</a></li>
                     </ul>
                 </div>
@@ -49,6 +49,9 @@
                 </div>
             </div>
         </header>
+        {% endblock %}
+
+        {% block mostrar %}
         {% endblock %}
         <!-- Main Content-->
         {% block contenido_about %}

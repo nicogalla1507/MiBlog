@@ -1,0 +1,15 @@
+{% extends "AppBlog/acerca_mi.html" %}
+
+{% block contenido_about %}
+<h1>Listado de Publicaciones de Blog</h1>
+<ul>
+    <h1>Listado de Publicaciones</h1>
+    <ul>
+      {% for info in publicacion %}
+        <li>
+          <h2>{{ info.nombre }}</h2>
+          <p>Autor: {{ info.contenido }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+{% endblock %}

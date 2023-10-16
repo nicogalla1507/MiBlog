@@ -10,5 +10,5 @@ class Register(models.Model):
     
     
 class AcercaDeMi(models.Model):
-    nombre = models.CharField(max_length=50,null=True)
+    nombre = models.CharField(max_length=100)
     contenido = models.TextField()

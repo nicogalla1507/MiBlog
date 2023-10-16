@@ -7,6 +7,7 @@ class RegisterForm(forms.Form):
     contrasena = forms.CharField()
     
 
-class AutorForm(forms.Form):
-    nombre = forms.CharField(max_length=50)
-    contenido = forms.CharField()
+class AutorForm(forms.ModelForm):
+    class Meta:
+        model = AcercaDeMi
+        fields = ['nombre', 'contenido']
