@@ -11,3 +11,7 @@ class AutorForm(forms.ModelForm):
     class Meta:
         model = AcercaDeMi
         fields = ['nombre', 'contenido']
+
+class LoginForm(forms.Form):
+    usuario= forms.CharField()
+    contrasena = forms.CharField()

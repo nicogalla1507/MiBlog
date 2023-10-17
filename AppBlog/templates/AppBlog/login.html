@@ -1,0 +1,16 @@
+{% extends "AppBlog/base.html" %}
+
+{% block main %}
+
+<h1>Inicio De Sesion</h1>
+<form action="" method="POST"> {% csrf_token %}
+    {% csrf_token %}
+    <table>
+        {{ formulario.as_table }}
+    </table>
+    <button type="submit">Iniciar Sesión</button>
+
+</form>
+
+
+{% endblock %}

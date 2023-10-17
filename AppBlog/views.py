@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.http import HttpResponseRedirect
-from .forms import RegisterForm, AutorForm
+from .forms import RegisterForm, AutorForm, LoginForm
 from .models import Register, AcercaDeMi
 
 # Create your views here.
@@ -19,15 +19,32 @@ def acercaDeMi(request):
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():             #una funcion para que el usuario se registre y pueda agregar informacion a la base de datos y mostrarla por la pagina 
             user = form.save()
             login(request, user)
-            return HttpResponseRedirect("AppBlog/inicio_register.html")  # Asegúrate de que la URL esté configurada correctamente
+            return HttpResponseRedirect("AppBlog/agregar_info.html")  
     else:
         form = UserCreationForm()
     return render(request, "AppBlog/register_form.html", {'form': form})
 
 
+def login(request):
+    if request.method == 'POST':
+       formulario = LoginForm(request.POST) 
+       if formulario.is_valid():
+           usuario = formulario.cleaned_data['usuario']
+           contrasena = formulario.cleaned_data['contrasena']
+           user = authenticate(request, usuario=usuario,contrasena=contrasena)
+           if user is not None:
+               login(request,user)
+               return redirect('editar')
+           else:
+               return render(request,'AppBLog/error.html')
+    else:
+        formulario = LoginForm()
+        
+    return render(request, "AppBlog/login.html",{"formulario":formulario})
+                   
 def editar_informacion_personal(request):
     if request.method == 'POST':
         form1 = AutorForm(request.POST)

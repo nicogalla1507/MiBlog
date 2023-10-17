@@ -7,8 +7,9 @@
     <ul>
       {% for info in publicacion %}
         <li>
-          <h2>{{ info.nombre }}</h2>
-          <p>Autor: {{ info.contenido }}</p>
+          <h2>Autor:{{ info.nombre }}</h2>
+          <p>Contenido: {{ info.contenido }}</p>
+          
         </li>
       {% endfor %}
     </ul>
