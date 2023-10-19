@@ -23,28 +23,34 @@ def register(request):
             info = form.cleaned_data
             instancia = Register(usuario = info['usuario'],email = info['email'], contrasena = info['contrasena'])
             instancia.save()
-            return HttpResponseRedirect("AppBlog/inicio_info.html")  
+            
+            return HttpResponseRedirect("AppBlog/inicio_register.html")  
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     return render(request, "AppBlog/register_form.html", {'form': form})
 
 
 def login(request):
     if request.method == 'POST':
-       formulario = LoginForm(request.POST) 
-       if formulario.is_valid():
-           usuario = formulario.cleaned_data['usuario']
-           contrasena = formulario.cleaned_data['contrasena']
-           user = authenticate(request, usuario=usuario,contrasena=contrasena)
-           if user is not None:
-               login(request,user)
-               return redirect('editar')
-           else:
-               return render(request,'AppBLog/error.html')
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+
+            try:
+                user = Register.objects.get(usuario=username)  # Supongo que 'usuario' es el campo de nombre de usuario en tu modelo
+                if user.contrasena == password:
+                    login(request, user)
+                    return redirect('inicio')  # Reemplaza 'inicio' con la URL de tu página de inicio
+                else:
+                    return render(request, 'AppBlog/error.html')
+            except Register.DoesNotExist:
+                return render(request, 'AppBlog/error.html')
+
     else:
-        formulario = LoginForm()
-        
-    return render(request, "AppBlog/login.html",{"formulario":formulario})
+        form = LoginForm()
+
+    return render(request, "AppBlog/login.html", {"form": form})
                    
 def editar_informacion_personal(request):
     if request.method == 'POST':
@@ -53,7 +59,7 @@ def editar_informacion_personal(request):
             info= form1.cleaned_data
             instancia = AcercaDeMi(nombre=info['nombre'],contenido=info['contenido'])
             instancia.save()
-            
+        
             return render(request,"AppBlog/acerca_mi.html")
         print("se ejecuto la pagina acerca de mi")
     else:
