@@ -20,6 +20,7 @@
     </head>
     <body>
         <!-- Navigation-->
+        {% block navbar %}
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="index.html">Start Bootstrap</a>
@@ -31,14 +32,13 @@
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'inicio' %}">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'about' %}">Acerca de la pagina</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'mostrar' %}">Ver DB</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'editar' %}">Editar Info Personal</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'register' %}">Regístrate!</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'login' %}">login</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        {% endblock %}
         <!-- Page Header-->
         {% block header %}
         <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
@@ -46,8 +46,8 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>Clean Blog</h1>
-                            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                            <h1>Mi Pagina</h1>
+                            <span class="subheading">La Pagina De Nico</span>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <!-- Post preview-->
                     <div class="post-preview">
                         <a href="post.html">
-                            <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
+                            <h2 class="post-title"></h2>
                             <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
                         </a>
                         <p class="post-meta">

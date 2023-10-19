@@ -34,23 +34,24 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
+            username = form.cleaned_data['usuario']
+            password = form.cleaned_data['contrasena']
 
             try:
-                user = Register.objects.get(usuario=username)  # Supongo que 'usuario' es el campo de nombre de usuario en tu modelo
-                if user.contrasena == password:
-                    login(request, user)
-                    return redirect('inicio')  # Reemplaza 'inicio' con la URL de tu página de inicio
-                else:
-                    return render(request, 'AppBlog/error.html')
+                user = Register.objects.get(usuario=username, contrasena=password)
+                # Si se encuentra un usuario con las credenciales, el usuario es válido
+                # Puedes realizar la acción de inicio de sesión aquí
+
+                return render(request,'AppBlog/inicio_login.html')  # Reemplaza 'inicio' con la URL de tu página de inicio
             except Register.DoesNotExist:
                 return render(request, 'AppBlog/error.html')
 
+    # Si la solicitud no es un POST o el formulario no es válido, muestra el formulario de inicio de sesión
     else:
         form = LoginForm()
 
-    return render(request, "AppBlog/login.html", {"form": form})
+    return render(request, 'AppBlog/login.html', {'formulario': form})
+
                    
 def editar_informacion_personal(request):
     if request.method == 'POST':
@@ -60,7 +61,7 @@ def editar_informacion_personal(request):
             instancia = AcercaDeMi(nombre=info['nombre'],contenido=info['contenido'])
             instancia.save()
         
-            return render(request,"AppBlog/acerca_mi.html")
+            return render(request,"AppBlog/inicio_login.html")
         print("se ejecuto la pagina acerca de mi")
     else:
         form1 = AutorForm()
