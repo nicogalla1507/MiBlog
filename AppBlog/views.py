@@ -18,11 +18,12 @@ def acercaDeMi(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():             #una funcion para que el usuario se registre y pueda agregar informacion a la base de datos y mostrarla por la pagina 
-            user = form.save()
-            login(request, user)
-            return HttpResponseRedirect("AppBlog/agregar_info.html")  
+            info = form.cleaned_data
+            instancia = Register(usuario = info['usuario'],email = info['email'], contrasena = info['contrasena'])
+            instancia.save()
+            return HttpResponseRedirect("AppBlog/inicio_info.html")  
     else:
         form = UserCreationForm()
     return render(request, "AppBlog/register_form.html", {'form': form})
@@ -52,7 +53,7 @@ def editar_informacion_personal(request):
             info= form1.cleaned_data
             instancia = AcercaDeMi(nombre=info['nombre'],contenido=info['contenido'])
             instancia.save()
-        
+            
             return render(request,"AppBlog/acerca_mi.html")
         print("se ejecuto la pagina acerca de mi")
     else:
