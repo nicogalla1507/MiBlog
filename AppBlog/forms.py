@@ -1,5 +1,4 @@
 from django import forms
-from .models import AcercaDeMi
 
 class RegisterForm(forms.Form):
     usuario = forms.CharField()
@@ -7,11 +6,14 @@ class RegisterForm(forms.Form):
     contrasena = forms.CharField()
     
 
-class AutorForm(forms.ModelForm):
-    class Meta:
-        model = AcercaDeMi
-        fields = ['nombre', 'contenido']
-
+class AutorForm(forms.Form):
+    titulo = forms.CharField(max_length=40)
+    subtitulo = forms.CharField(max_length=50)
+    autor = forms.CharField(max_length=70)
+    fecha = forms.DateField()
+    contenido = forms.CharField(widget=forms.TextInput())
+    
+    
 class LoginForm(forms.Form):
     usuario= forms.CharField()
-    contrasena = forms.CharField()
+    contrasena = forms.CharField(widget=forms.PasswordInput())

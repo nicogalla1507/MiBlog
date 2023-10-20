@@ -19,12 +19,12 @@ def acercaDeMi(request):
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
-        if form.is_valid():             #una funcion para que el usuario se registre y pueda agregar informacion a la base de datos y mostrarla por la pagina 
+        if form.is_valid():
             info = form.cleaned_data
             instancia = Register(usuario = info['usuario'],email = info['email'], contrasena = info['contrasena'])
             instancia.save()
             
-            return HttpResponseRedirect("AppBlog/inicio_register.html")  
+            return render("AppBlog/inicio_register.html")  
     else:
         form = RegisterForm()
     return render(request, "AppBlog/register_form.html", {'form': form})
@@ -39,14 +39,13 @@ def login(request):
 
             try:
                 user = Register.objects.get(usuario=username, contrasena=password)
-                # Si se encuentra un usuario con las credenciales, el usuario es válido
-                # Puedes realizar la acción de inicio de sesión aquí
 
-                return render(request,'AppBlog/inicio_login.html')  # Reemplaza 'inicio' con la URL de tu página de inicio
+
+                return render(request,'AppBlog/inicio_login.html')  
             except Register.DoesNotExist:
                 return render(request, 'AppBlog/error.html')
 
-    # Si la solicitud no es un POST o el formulario no es válido, muestra el formulario de inicio de sesión
+    
     else:
         form = LoginForm()
 
@@ -58,7 +57,7 @@ def editar_informacion_personal(request):
         form1 = AutorForm(request.POST)
         if form1.is_valid():
             info= form1.cleaned_data
-            instancia = AcercaDeMi(nombre=info['nombre'],contenido=info['contenido'])
+            instancia = AcercaDeMi(autor=info['autor'],subtitulo=info['subtitulo'],contenido=info['contenido'])
             instancia.save()
         
             return render(request,"AppBlog/inicio_login.html")
