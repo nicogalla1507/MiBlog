@@ -57,7 +57,7 @@ def editar_informacion_personal(request):
         form1 = AutorForm(request.POST)
         if form1.is_valid():
             info= form1.cleaned_data
-            instancia = AcercaDeMi(autor=info['autor'],subtitulo=info['subtitulo'],contenido=info['contenido'])
+            instancia = AcercaDeMi(autor=info['autor'],tiutlo= info['tiutlo'],subtitulo=info['subtitulo'],contenido=info['contenido'], fecha=info['fecha'])
             instancia.save()
         
             return render(request,"AppBlog/inicio_login.html")
@@ -74,8 +74,8 @@ def mostrar_info(request):
     return render(request, "AppBlog/mostrar.html",{"publicacion":publicacion})
 
 
-def eliminar(request, id):
-    borrar = AcercaDeMi.objects.GET(nombre = id)
+def eliminar(request, autor):
+    borrar = AcercaDeMi.objects.get(valor_a_borrar = autor)
     borrar.delete()
     items = AcercaDeMi.objects.all()
     

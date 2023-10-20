@@ -41,8 +41,12 @@
     <ul>
       {% for info in publicacion %}
         <li>
-          <h2>Autor:{{ info.nombre }}</h2>
-          <p>Contenido: {{ info.contenido }}</p>
+          <h1>Titulo: <p>{{ info.tiutlo }}</p>
+          <h1>subtitulo:</h1> <p>{{ info.subtitulo }}</p>
+          <h1>Autor:</h1> <p>{{ info.autor }}</p>
+          <h1>Fecha:</h1> <p>{{ info.fecha }}</p>
+          <h1>Contenido:</h1> <p>{{ info.contenido }}</p>
+          <p></p>
           
         </li>
       {% endfor %}

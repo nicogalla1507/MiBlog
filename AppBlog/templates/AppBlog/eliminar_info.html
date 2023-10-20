@@ -1,1 +1,10 @@
 {% extends "AppBlog/login.html" %}
+
+<body>
+    <ul>
+        {% for p in publicacion %}
+            <li>{{ p.nombre }}</li>
+            <a href="{% url 'eliminar' p.id %}">Eliminar</a>
+        {% endfor %}
+    </ul>
+</body>
