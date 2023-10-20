@@ -72,3 +72,13 @@ def mostrar_info(request):
     publicacion = AcercaDeMi.objects.all()
     
     return render(request, "AppBlog/mostrar.html",{"publicacion":publicacion})
+
+
+def eliminar(request, id):
+    borrar = AcercaDeMi.objects.GET(nombre = id)
+    borrar.delete()
+    items = AcercaDeMi.objects.all()
+    
+    contexto = {"publicacion",items}
+    
+    return render(request,"AppBlog/mostrar.html",contexto)
