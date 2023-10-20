@@ -57,7 +57,7 @@ def editar_informacion_personal(request):
         form1 = AutorForm(request.POST)
         if form1.is_valid():
             info= form1.cleaned_data
-            instancia = AcercaDeMi(autor=info['autor'],tiutlo= info['tiutlo'],subtitulo=info['subtitulo'],contenido=info['contenido'], fecha=info['fecha'])
+            instancia = AcercaDeMi(autor=info['autor'],titulo= info['titulo'],subtitulo=info['subtitulo'],contenido=info['contenido'], fecha=info['fecha'])
             instancia.save()
         
             return render(request,"AppBlog/inicio_login.html")
