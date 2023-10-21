@@ -1,58 +1,66 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login, authenticate
-from django.views import View
-from django.http import HttpResponseRedirect
-from .forms import RegisterForm, AutorForm, LoginForm
-from .models import Register, AcercaDeMi
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from .forms import AutorForm
+from .models import AcercaDeMi
 
 # Create your views here.
 
 def PruebaPagina(request):
     return render(request,"AppBlog/base.html")
 
+
 def inicio(request):
     return render(request, "AppBlog/inicio.html")
 
+@login_required
 def acercaDeMi(request):
     return render(request,"AppBlog/acerca_mi.html")
 
+def error(request):
+    return render(request,"AppBlog/error.html")
+
+
 def register(request):
     if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            info = form.cleaned_data
-            instancia = Register(usuario = info['usuario'],email = info['email'], contrasena = info['contrasena'])
-            instancia.save()
-            
-            return render("AppBlog/inicio_register.html")  
+        form = UserCreationForm(request.POST)
+        
+        if form.is_valid():             
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request,"AppBlog/inicio_register.html")
+             
     else:
-        form = RegisterForm()
+        form = UserCreationForm()
     return render(request, "AppBlog/register_form.html", {'form': form})
 
 
-def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['usuario']
-            password = form.cleaned_data['contrasena']
+def iniciar_sesion(request):
+    if request.method == "POST":
+        formulario = AuthenticationForm(request, request.POST)
 
-            try:
-                user = Register.objects.get(usuario=username, contrasena=password)
+        if formulario.is_valid():
+            usuario = request.POST.get('username')
+            contrasena = request.POST.get('password')
 
+            user = authenticate(username=usuario, password=contrasena)
+            if user is not None:
+                login(request, user)
+                return render(request, "AppBlog/inicio_login.html")
+            else:
+                return redirect('error')
+        else:
 
-                return render(request,'AppBlog/inicio_login.html')  
-            except Register.DoesNotExist:
-                return render(request, 'AppBlog/error.html')
+            print(formulario.errors)
 
-    
-    else:
-        form = LoginForm()
+    formulario = AuthenticationForm()
+    return render(request, "AppBlog/login.html", {"formulario": formulario})
 
-    return render(request, 'AppBlog/login.html', {'formulario': form})
+def logout_view(request):
+    logout(request)
+    return redirect('inicio')
 
-                   
 def editar_informacion_personal(request):
     if request.method == 'POST':
         form1 = AutorForm(request.POST)
@@ -68,29 +76,11 @@ def editar_informacion_personal(request):
     
     return render(request,"AppBlog/agregar_info.html",{"form1":form1})
 
-
 def mostrar_info(request):
     publicacion = AcercaDeMi.objects.all()
     
     return render(request, "AppBlog/mostrar.html",{"publicacion":publicacion})
 
 
-class Eliminar(View):
-    def obtener(self,request,id):
-        try:
-            objeto_eliminar = AcercaDeMi.objects.get(pk=id)
-            texto = "NO EXISTE ESTE OBJETO|VOLVER AL INICIO"
-        except AcercaDeMi.DoesNotExist:
-            return render(request,"AppBlog/objeto_inexistente.html",{"texto":texto})
-        
-        else:
-            return render(request,"AppBlog/eliminar_info.html")
-        
-    def post(self, request, id):
-        objeto_eliminar = AcercaDeMi.objects.get(pk=id)
-        
-        objeto_eliminar.delete()
-        
-        return redirect('mostrar')
     
     

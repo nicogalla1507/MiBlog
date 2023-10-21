@@ -3,14 +3,22 @@
 {% block main %}
 
 <h1>Inicio De Sesion</h1>
-<form action="" method="POST"> {% csrf_token %}
-    {% csrf_token %}
-    <table>
-        {{ formulario.as_table }}
-    </table>
-    <button type="submit">Iniciar Sesión</button>
 
+<form action="" method="POST">
+    {% csrf_token %}
+    
+    {{ formulario.as_p }}
+    {{ formulario.non_field_errors }}
+        
+    <input type="submit">Iniciar Sesión</button>
 </form>
 
+{% if user.is_authenticated %}
+    <p>Hola!, {{ user.username }}! Has iniciado sesion.</p>
+
+{% else %}
+    <p>No has iniciado sesion. Por favor inicie sesion.</p>
+    
+{% endif %}
 
 {% endblock %}

@@ -23,9 +23,9 @@
             <body>
                 <h1>Register</h1>
                 <form action="" method="POST"> {% csrf_token %}
-                    <table>
-                        {{ form.as_table }}
-                    </table>
+                    
+                        {{ form.as_p }}
+                    
                     <input type="submit" value="Enviar">
                 </form>
             </body>
