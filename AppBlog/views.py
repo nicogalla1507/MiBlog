@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
+from django.views import View
 from django.http import HttpResponseRedirect
 from .forms import RegisterForm, AutorForm, LoginForm
 from .models import Register, AcercaDeMi
@@ -74,11 +75,22 @@ def mostrar_info(request):
     return render(request, "AppBlog/mostrar.html",{"publicacion":publicacion})
 
 
-def eliminar(request, autor):
-    borrar = AcercaDeMi.objects.get(valor_a_borrar = autor)
-    borrar.delete()
-    items = AcercaDeMi.objects.all()
+class Eliminar(View):
+    def obtener(self,request,id):
+        try:
+            objeto_eliminar = AcercaDeMi.objects.get(pk=id)
+            texto = "NO EXISTE ESTE OBJETO|VOLVER AL INICIO"
+        except AcercaDeMi.DoesNotExist:
+            return render(request,"AppBlog/objeto_inexistente.html",{"texto":texto})
+        
+        else:
+            return render(request,"AppBlog/eliminar_info.html")
+        
+    def post(self, request, id):
+        objeto_eliminar = AcercaDeMi.objects.get(pk=id)
+        
+        objeto_eliminar.delete()
+        
+        return redirect('mostrar')
     
-    contexto = {"publicacion",items}
     
-    return render(request,"AppBlog/mostrar.html",contexto)

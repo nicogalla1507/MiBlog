@@ -11,5 +11,5 @@ urlpatterns = [
     path('mostrar/',mostrar_info,name="mostrar"),
     path('login/',login,name="login"),
     path('error/',login,name='error'),
-    path('eliminar/<id>/',eliminar, name='eliminar'),
+    path('eliminar/<int:id>/',Eliminar.as_view(), name='eliminar'),
 ]
