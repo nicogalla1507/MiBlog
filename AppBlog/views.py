@@ -14,7 +14,7 @@ def PruebaPagina(request):
 def inicio(request):
     return render(request, "AppBlog/inicio.html")
 
-@login_required
+
 def acercaDeMi(request):
     return render(request,"AppBlog/acerca_mi.html")
 
@@ -61,6 +61,7 @@ def logout_view(request):
     logout(request)
     return redirect('inicio')
 
+
 def editar_informacion_personal(request):
     if request.method == 'POST':
         form1 = AutorForm(request.POST)
@@ -76,6 +77,7 @@ def editar_informacion_personal(request):
     
     return render(request,"AppBlog/agregar_info.html",{"form1":form1})
 
+@login_required
 def mostrar_info(request):
     publicacion = AcercaDeMi.objects.all()
     
@@ -83,4 +85,5 @@ def mostrar_info(request):
 
 
     
-    
+def eliminar_info(request,):
+    pass
