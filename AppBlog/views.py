@@ -61,7 +61,7 @@ def logout_view(request):
     logout(request)
     return redirect('inicio')
 
-
+@login_required
 def editar_informacion_personal(request):
     if request.method == 'POST':
         form1 = AutorForm(request.POST)
@@ -84,7 +84,6 @@ def mostrar_info(request):
     return render(request, "AppBlog/mostrar.html",{"publicacion":publicacion})
 
 
-    
 def eliminar_info(request, nombre_id):
     try:
         elemento = AcercaDeMi.objects.get(id=nombre_id)
