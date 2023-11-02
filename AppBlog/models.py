@@ -10,8 +10,8 @@ class Register(models.Model):
     
     
 class AcercaDeMi(models.Model):
-    titulo = models.CharField(max_length=40,null=True)
-    subtitulo = models.CharField(max_length=60,null=True)
-    autor = models.CharField(max_length=60,null=True)
-    fecha = models.DateField(null=True)
-    contenido = models.TextField(null=True)
+    titulo = models.CharField(max_length=40,null=False)
+    subtitulo = models.CharField(max_length=60,null=False)
+    autor = models.CharField(max_length=60,null=False)
+    fecha = models.DateField(null=False)
+    contenido = models.TextField(null=False)

@@ -12,5 +12,6 @@ urlpatterns = [
     path('mostrar/',mostrar_info,name="mostrar"),
     path('login/',iniciar_sesion,name="login"),
     path('error/',error,name="error"),
-    path('logout/',logout_view,name="logout")
+    path('logout/',logout_view,name="logout"),
+    path('eliminar/<int:nombre_id>/',eliminar_info,name="eliminar")
 ]

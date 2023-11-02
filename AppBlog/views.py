@@ -85,5 +85,16 @@ def mostrar_info(request):
 
 
     
-def eliminar_info(request,):
-    pass
+def eliminar_info(request, nombre_id):
+    try:
+        elemento = AcercaDeMi.objects.get(id=nombre_id)
+    except AcercaDeMi.DoesNotExist:
+        # Manejar el caso donde el objeto no existe
+        elemento = None
+
+    if elemento is not None:
+        elemento.delete()
+
+    elementos = AcercaDeMi.objects.all()
+    contexto = {"elemento": elementos}
+    return render(request, "AppBlog/mostrar.html", contexto)

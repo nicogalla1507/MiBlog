@@ -46,7 +46,7 @@
             <p> AUTOR: {{info.autor}}</p>
             <p>FECHA: {{ info.fecha }}</p>
             <p>CONTENIDO: {{ info.contenido }}</p>
-          
+            <button><a href="{% url 'eliminar' info.id %}">Eliminar</a></button>
         </li>
         <hr>
       {% endfor %}
