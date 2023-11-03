@@ -8,8 +8,8 @@ class RegisterForm(forms.Form):
 
 class AutorForm(forms.Form):
     titulo = forms.CharField(max_length=40)
-    subtitulo = forms.CharField(max_length=50)
-    autor = forms.CharField(max_length=70)
+    subtitulo = forms.CharField(max_length=60)
+    autor = forms.CharField(max_length=60)
     fecha = forms.DateField()
     contenido = forms.CharField(widget=forms.TextInput())
     

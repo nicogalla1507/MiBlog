@@ -88,7 +88,7 @@ def eliminar_info(request, nombre_id):
     try:
         elemento = AcercaDeMi.objects.get(id=nombre_id)
     except AcercaDeMi.DoesNotExist:
-        # Manejar el caso donde el objeto no existe
+        
         elemento = None
 
     if elemento is not None:
@@ -97,3 +97,34 @@ def eliminar_info(request, nombre_id):
     elementos = AcercaDeMi.objects.all()
     contexto = {"elemento": elementos}
     return render(request, "AppBlog/mostrar.html", contexto)
+
+@login_required
+def editar_crud(request, publicacion_id):
+    publicaciones = AcercaDeMi.objects.get(id=publicacion_id)
+
+    if request.method == "POST":
+        formulario = AutorForm(request.POST)
+
+        if formulario.is_valid():
+            info = formulario.cleaned_data
+
+            publicaciones.titulo = info["titulo"]
+            publicaciones.subtitulo = info["subtitulo"]
+            publicaciones.autor = info["autor"]
+            publicaciones.fecha = info["fecha"]
+            publicaciones.contenido = info["contenido"]
+
+            publicaciones.save()
+
+            return render(request, "AppBlog/inicio_login.html")
+    else:
+        formulario = AutorForm(initial={
+            'titulo': publicaciones.titulo,
+            'subtitulo': publicaciones.subtitulo,
+            'autor': publicaciones.autor,
+            'fecha': publicaciones.fecha,
+            'contenido': publicaciones.contenido
+        })
+
+    return render(request, "AppBlog/CRUD_editar.html", {"form3": formulario})
+            
