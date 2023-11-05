@@ -12,8 +12,15 @@ def PruebaPagina(request):
 
 
 def inicio(request):
-    return render(request, "AppBlog/inicio.html")
+    query = request.GET.get('q')
+    resultados = []
 
+    if query:
+        resultados = AcercaDeMi.objects.filter(titulo__iexact=query)
+    
+    return render(request, 'AppBlog/inicio.html', {'resultados': resultados, 'query': query})
+    
+    
 
 def acercaDeMi(request):
     return render(request,"AppBlog/acerca_mi.html")
@@ -128,3 +135,9 @@ def editar_crud(request, publicacion_id):
 
     return render(request, "AppBlog/CRUD_editar.html", {"form3": formulario})
             
+          
+def busqueda(request):
+    query = request.GET.get('q','')  
+    resultados = AcercaDeMi.objects.filter(titulo__icontains=query)  
+    return render(request, 'AppBlog/inicio.html', {'resultados': resultados, 'query': query})
+    

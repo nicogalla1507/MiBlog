@@ -14,5 +14,6 @@ urlpatterns = [
     path('error/',error,name="error"),
     path('logout/',logout_view,name="logout"),
     path('eliminar/<int:nombre_id>/',eliminar_info,name="eliminar"),
-    path('crudeditar/<int:publicacion_id>/',editar_crud,name="crudeditar")
+    path('crudeditar/<int:publicacion_id>/',editar_crud,name="crudeditar"),
+    path('busqueda/',busqueda,name="busqueda")
 ]
