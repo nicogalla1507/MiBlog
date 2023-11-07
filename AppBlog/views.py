@@ -136,8 +136,5 @@ def editar_crud(request, publicacion_id):
     return render(request, "AppBlog/CRUD_editar.html", {"form3": formulario})
             
           
-def busqueda(request):
-    query = request.GET.get('q','')  
-    resultados = AcercaDeMi.objects.filter(titulo__icontains=query)  
-    return render(request, 'AppBlog/inicio.html', {'resultados': resultados, 'query': query})
+
     
